@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery_app/screens/auth_screen/forgot_password_screen.dart';
+import 'package:food_delivery_app/screens/auth_screen/register_screen.dart';
 import 'package:food_delivery_app/screens/auth_screen/widgets/My_textfield.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/auth_heading.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/auth_subheading.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/my_button.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/my_divider.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/password_textfield.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/svg_icons.dart';
+import 'package:food_delivery_app/screens/auth_screen/widgets/textfield_heading.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
+  void onPressed() {
+    print('button is pressed');
+  }
 
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,136 +29,81 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Login to your \naccount.',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35),
-                ),
-                Text(
-                  'Please sign in to your account',
-                  style: TextStyle(fontSize: 15, color: Colors.grey),
+                AuthHeadings(headlineText: "Login to your \naccount."),
+                AuthSubheading(
+                  subHeadingText: "Please sign in to your account",
                 ),
                 SizedBox(height: 30),
-                Text(
-                  'Email Address',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
+                TextfieldHeading(textFieldHeading: "Email Address"),
                 SizedBox(height: 20),
                 MyTextfield(hintText: 'Email'),
                 SizedBox(height: 20),
-                Text(
-                  'Password',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
+                TextfieldHeading(textFieldHeading: "Password"),
                 SizedBox(height: 20),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.visibility_off),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 0.5, color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    hintText: 'Password',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
+                PasswordTextfield(hintText: 'Password'),
                 SizedBox(height: 25),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
-                      'Forgot password?',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.orange,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 25),
-                SizedBox(
-                  height: 50,
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.orange,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(40),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 25),
-                Row(
-                  children: [
-                    Expanded(child: Divider(thickness: 2)),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    InkWell(
+                      onTap: () {
+                       showModalBottomSheet(
+                        isScrollControlled: true,
+                        backgroundColor: Colors.white,
+                        context: context, builder: (context){
+                        return SizedBox(
+                          height: 500,
+                          width: double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(25),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  AuthHeadings(headlineText: 'Forgot password?'),
+                                  AuthSubheading(subHeadingText: 'Select which contact details should we use to \nreset your password'),
+                                  Container(
+                                    height: 50,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.grey,
+                                        width: 1,
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: ListTile(
+                                      leading: Container(
+                                        color: Colors.grey,
+                                        child: Center(
+                                          child: SvgPicture.asset('assets/svg/WhatsApp.svg'))),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                       });
+                      },
                       child: Text(
-                        'Or sign in with',
+                        'Forgot password?',
                         style: TextStyle(
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                          color: Colors.grey,
-                          fontSize: 15,
+                          color: Colors.orange,
                         ),
                       ),
                     ),
-                    Expanded(child: Divider(thickness: 2)),
                   ],
                 ),
+                SizedBox(height: 25),
+                MyButton(buttonText: 'Sign In', onPressed: onPressed),
+                SizedBox(height: 25),
+                MyDivider(),
                 SizedBox(height: 35),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      // backgroundColor: Colors.white,
-                      radius: 28,
-                      backgroundColor: Colors.grey.shade200,
-                      child: CircleAvatar(
-                        radius: 26,
-                        backgroundColor: Colors.white,
-                        child: SvgPicture.asset('assets/svg/google.svg'),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    CircleAvatar(
-                      radius: 28,
-                      backgroundColor: Colors.grey.shade200,
-                      child: CircleAvatar(
-                        radius: 26,
-                        backgroundColor: Colors.white,
-                        child: SvgPicture.asset('assets/svg/facebook.svg'),
-                      ),
-                    ),
-                    SizedBox(width: 20),
-                    CircleAvatar(
-                      radius: 28,
-                      backgroundColor: Colors.grey.shade200,
-                      child: CircleAvatar(
-                        radius: 26,
-                        backgroundColor: Colors.white,
-                        child: SvgPicture.asset('assets/svg/apple.svg'),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 35,),
+                SvgIcons(),
+                SizedBox(height: 35),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -158,14 +111,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       "Don't have an account?",
                       style: TextStyle(
                         fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                      Text(
-                      " Register",
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.orange,
-                        fontWeight: FontWeight.bold),
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => RegisterScreen(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        " Register",
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ],
                 ),
