@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:food_delivery_app/screens/auth_screen/forgot_password_screen.dart';
 import 'package:food_delivery_app/screens/auth_screen/register_screen.dart';
 import 'package:food_delivery_app/screens/auth_screen/widgets/My_textfield.dart';
 import 'package:food_delivery_app/screens/auth_screen/widgets/auth_heading.dart';
@@ -61,24 +59,11 @@ class LoginScreen extends StatelessWidget {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  AuthHeadings(headlineText: 'Forgot password?'),
-                                  AuthSubheading(subHeadingText: 'Select which contact details should we use to \nreset your password'),
-                                  Container(
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.grey,
-                                        width: 1,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: ListTile(
-                                      leading: Container(
-                                        color: Colors.grey,
-                                        child: Center(
-                                          child: SvgPicture.asset('assets/svg/WhatsApp.svg'))),
-                                    ),
-                                  )
+                                  // AuthHeadings(headlineText: 'Forgot password?'),
+                                  // AuthSubheading(subHeadingText: 'Select which contact details should we use to \nreset your password'),
+                                  Center(
+                                    child: AuthHeadings(headlineText: 'Rock Ranger')),
+                                 
                                 ],
                               ),
                             ),
